@@ -83,7 +83,8 @@ section{padding:90px 24px}
 .install-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 28px;text-align:center}
 .install-box h3{margin-bottom:10px;font-size:1.1rem}
 .install-box p{color:var(--gray);font-size:.88rem;margin-bottom:20px}
-.install-box .file{display:inline-flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid #2a2a2a;border-radius:10px;padding:12px 22px;font-size:.88rem;color:var(--text)}
+.install-box .file{display:inline-flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid #2a2a2a;border-radius:10px;padding:12px 22px;font-size:.88rem;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.install-box .file:hover{border-color:var(--red);box-shadow:0 0 20px rgba(255,60,60,.15)}
 .install-box .file svg{width:18px;height:18px;fill:var(--red)}
 
 /* ─── FOOTER ─── */
@@ -128,7 +129,7 @@ footer a:hover{text-decoration:underline}
   </div>
   <h1>ArrowKeys<span class="dot">.</span></h1>
   <p class="tagline">Masaüstünde her zaman üstte duran, fareyle kontrol edilen sanal ok tuşu paneli.</p>
-  <a href="#install" class="cta">
+  <a href="https://github.com/suphimen/ArrowKeys/releases/latest/download/ArrowKeys_Setup.exe" class="cta">
     <svg viewBox="0 0 24 24"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3z"/><path d="M5 20h14v2H5z"/></svg>
     İndir
   </a>
@@ -250,17 +251,17 @@ footer a:hover{text-decoration:underline}
   <div class="install-box" style="max-width:520px;width:100%">
     <h3>İndir & Kur</h3>
     <p>Tek dosya, bağımlılık yok. Python kurulu olmasına gerek yoktur.</p>
-    <div class="file">
+    <a href="https://github.com/suphimen/ArrowKeys/releases/latest/download/ArrowKeys_Setup.exe" class="file" style="text-decoration:none">
       <svg viewBox="0 0 24 24"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3z"/><path d="M5 20h14v2H5z"/></svg>
       ArrowKeys_Setup.exe &nbsp;·&nbsp; 33 MB &nbsp;·&nbsp; Windows 10/11
-    </div>
+    </a>
   </div>
 </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>ArrowKeys &mdash; Made with Python + Win32 API by <a href="#">suphimen</a> &middot; MIT License</p>
+  <p>ArrowKeys &mdash; Made with Python + Win32 API by <a href="https://x.com/suphimen" target="_blank" rel="noopener">suphimen</a> &middot; MIT License</p>
 </footer>
 
 </body>
