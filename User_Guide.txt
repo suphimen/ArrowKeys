@@ -1,0 +1,49 @@
+ARROWKEYS - USER GUIDE
+=======================
+coder: suphimen
+
+ArrowKeys is a small on-screen arrow-key pad that always stays on top of
+every other window. Clicking a key sends a real keyboard arrow-key signal,
+so you can navigate with the mouse in text fields, games, or any other
+app exactly as if you'd pressed the real arrow keys.
+
+The window opens centered on your screen.
+
+HOW TO USE
+----------
+- LEFT CLICK (on a key)
+    Sends an arrow-key press in that direction. Holding the mouse button
+    down keeps the key held down, just like holding a real key.
+
+- RIGHT CLICK + DRAG (on a key)
+    Moves the window anywhere on screen.
+
+- RIGHT CLICK (released without dragging)
+    Opens a small menu with:
+        Grow   (+)  -> Makes the window a bit bigger
+        Shrink (−)  -> Makes the window a bit smaller
+        Close       -> Quits the app completely (shown in red)
+    Click Grow / Shrink repeatedly to reach the size you want. The
+    window's center stays fixed, so it only grows/shrinks outward or
+    inward evenly.
+
+- HOVER
+    A key lightens slightly when the mouse is over it, and turns reddish
+    while pressed, so it's always clear which key is active.
+
+NOTES
+-----
+- If the app is already running and you try to launch it again, you'll
+  get a warning instead of a second window opening.
+- The window never becomes the "active" window, so whatever you were
+  working in (a document, browser, game, etc.) stays focused and the
+  arrow-key signal goes straight to it.
+- Only the 4 keys are visible - there is no frame, border, or line
+  around them.
+- The arrow icons scale smoothly as you grow or shrink the window.
+
+UNINSTALLING
+------------
+Open Windows Settings > Apps, find "ArrowKeys" and uninstall it from
+there, or use the "Uninstall" shortcut in the ArrowKeys Start Menu
+folder.
