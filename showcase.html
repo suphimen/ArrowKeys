@@ -27,6 +27,10 @@ nav .logo{font-weight:700;font-size:1.05rem;letter-spacing:.4px}
 nav .logo span{color:var(--red)}
 nav .links a{color:var(--gray);text-decoration:none;margin-left:28px;font-size:.85rem;transition:color .2s}
 nav .links a:hover{color:var(--text)}
+.links .lang{margin-left:28px;display:inline-flex;gap:4px;vertical-align:middle}
+.lang-btn{background:transparent;border:1px solid #333;color:var(--gray);border-radius:6px;padding:3px 10px;font-size:.72rem;cursor:pointer;transition:all .2s;font-weight:600}
+.lang-btn:hover{color:var(--text);border-color:#555}
+.lang-btn.active{background:var(--red);border-color:var(--red);color:#fff}
 
 /* ─── HERO ─── */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px}
@@ -98,6 +102,7 @@ footer a:hover{text-decoration:underline}
   .arrow-demo{grid-template-columns:repeat(3,60px);grid-template-rows:repeat(2,60px)}
   .features{grid-template-columns:1fr}
   nav .links a{margin-left:16px;font-size:.78rem}
+  .links .lang{margin-left:14px}
 }
 </style>
 </head>
@@ -108,10 +113,14 @@ footer a:hover{text-decoration:underline}
 <div class="inner">
   <div class="logo"><span>A</span>rrowKeys</div>
   <div class="links">
-    <a href="#features">Özellikler</a>
-    <a href="#howto">Kullanım</a>
-    <a href="#tech">Teknoloji</a>
-    <a href="#install">İndir</a>
+    <a href="#features" data-i18n="nav.features">Özellikler</a>
+    <a href="#howto" data-i18n="nav.howto">Kullanım</a>
+    <a href="#tech" data-i18n="nav.tech">Teknoloji</a>
+    <a href="#install" data-i18n="nav.download">İndir</a>
+    <span class="lang">
+      <button class="lang-btn" data-lang="tr">TR</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </span>
   </div>
 </div>
 </nav>
@@ -128,10 +137,10 @@ footer a:hover{text-decoration:underline}
     <div class="k filled" title="Right"><img src="data:image/png;base64,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" alt="Right" width="60" height="60"></div>
   </div>
   <h1>ArrowKeys<span class="dot">.</span></h1>
-  <p class="tagline">Masaüstünde her zaman üstte duran, fareyle kontrol edilen sanal ok tuşu paneli.</p>
+  <p class="tagline" data-i18n="hero.tagline">Masaüstünde her zaman üstte duran, fareyle kontrol edilen sanal ok tuşu paneli.</p>
   <a href="https://github.com/suphimen/ArrowKeys/releases/latest/download/ArrowKeys_Setup.exe" class="cta">
     <svg viewBox="0 0 24 24"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3z"/><path d="M5 20h14v2H5z"/></svg>
-    İndir
+    <span data-i18n="hero.download">İndir</span>
   </a>
 </div>
 </section>
@@ -139,40 +148,40 @@ footer a:hover{text-decoration:underline}
 <!-- FEATURES -->
 <section id="features">
 <div class="section-inner">
-  <div class="section-label">Özellikler</div>
-  <h2 class="section-title">Neden ArrowKeys?</h2>
-  <p class="section-desc">Normal klavye tuşları yetersiz kaldığında, oyunlarda veya metin düzenleyicilerde tam kontrol sağlar.</p>
+  <div class="section-label" data-i18n="f.label">Özellikler</div>
+  <h2 class="section-title" data-i18n="f.title">Neden ArrowKeys?</h2>
+  <p class="section-desc" data-i18n="f.desc">Normal klavye tuşları yetersiz kaldığında, oyunlarda veya metin düzenleyicilerde tam kontrol sağlar.</p>
 
   <div class="features">
     <div class="feature">
       <div class="icon r">⟳</div>
-      <h3>Her Zaman Üstte</h3>
-      <p>Pencere asla arka plana düşmez. Çalışırken sürekli görünür kalır.</p>
+      <h3 data-i18n="f1.title">Her Zaman Üstte</h3>
+      <p data-i18n="f1.desc">Pencere asla arka plana düşmez. Çalışırken sürekli görünür kalır.</p>
     </div>
     <div class="feature">
       <div class="icon g">⬡</div>
-      <h3>Odağı Çalmaz</h3>
-      <p>WS_EX_NOACTIVATE ile çalışır — yazdığınız belge, açtığınız oyun odak kaybetmez.</p>
+      <h3 data-i18n="f2.title">Odağı Çalmaz</h3>
+      <p data-i18n="f2.desc">WS_EX_NOACTIVATE ile çalışır — yazdığınız belge, açtığınız oyun odak kaybetmez.</p>
     </div>
     <div class="feature">
       <div class="icon b">⇔</div>
-      <h3>Sürükle & Boyutlandır</h3>
-      <p>Sağ tıkla sürükle → taşı. Sağ tık menüsünden Büyüt/Küçült ile ölçekle.</p>
+      <h3 data-i18n="f3.title">Sürükle & Boyutlandır</h3>
+      <p data-i18n="f3.desc">Sağ tıkla sürükle → taşı. Sağ tık menüsünden Büyüt/Küçült ile ölçekle.</p>
     </div>
     <div class="feature">
       <div class="icon o">△</div>
-      <h3>Tutarak Tekrarla</h3>
-      <p>Tuşa basılı tuttuğunuzda ok sinyali otomatik tekrarlanır — fiziksel tuş gibi çalışır.</p>
+      <h3 data-i18n="f4.title">Tutarak Tekrarla</h3>
+      <p data-i18n="f4.desc">Tuşa basılı tuttuğunuzda ok sinyali otomatik tekrarlanır — fiziksel tuş gibi çalışır.</p>
     </div>
     <div class="feature">
       <div class="icon r">◉</div>
-      <h3>Yuvarlak Köşeler</h3>
-      <p>WinAPI region ile sadece tuşlar görünür, çerçeve yok — sade ve temiz.</p>
+      <h3 data-i18n="f5.title">Yuvarlak Köşeler</h3>
+      <p data-i18n="f5.desc">WinAPI region ile sadece tuşlar görünür, çerçeve yok — sade ve temiz.</p>
     </div>
     <div class="feature">
       <div class="icon g">⚖</div>
-      <h3>Yalnızca Tek Instance</h3>
-      <p>İkinci kez çalıştırmaya çalıştığınızda uyarı alırsınız — çift pencere açılmaz.</p>
+      <h3 data-i18n="f6.title">Yalnızca Tek Instance</h3>
+      <p data-i18n="f6.desc">İkinci kez çalıştırmaya çalıştığınızda uyarı alırsınız — çift pencere açılmaz.</p>
     </div>
   </div>
 </div>
@@ -181,43 +190,43 @@ footer a:hover{text-decoration:underline}
 <!-- HOW TO -->
 <section id="howto" style="background:var(--surface)">
 <div class="section-inner">
-  <div class="section-label">Kullanım Kılavuzu</div>
-  <h2 class="section-title">Nasıl Çalışır?</h2>
+  <div class="section-label" data-i18n="h.label">Kullanım Kılavuzu</div>
+  <h2 class="section-title" data-i18n="h.title">Nasıl Çalışır?</h2>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
       <div>
-        <h3>Sol Tıkla → Tuş Bas</h3>
-        <p>Herhangi bir ok tuşuna sol tıklayın. Kırmızı renk yanar ve ok sinyali gönderilir.</p>
+        <h3 data-i18n="h.s1.title">Sol Tıkla → Tuş Bas</h3>
+        <p data-i18n="h.s1.desc">Herhangi bir ok tuşuna sol tıklayın. Kırmızı renk yanar ve ok sinyali gönderilir.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <div>
-        <h3>Basılı Tut → Tekrarla</h3>
-        <p>Fareyi basılı tutmaya devam edin; 450ms sonra tuş otomatik tekrarlamaya başlar.</p>
+        <h3 data-i18n="h.s2.title">Basılı Tut → Tekrarla</h3>
+        <p data-i18n="h.s2.desc">Fareyi basılı tutmaya devam edin; 450ms sonra tuş otomatik tekrarlamaya başlar.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <div>
-        <h3>Sağ Tık + Sürükle → Taşı</h3>
-        <p>Pencereyi ekranda istediğiniz yere taşıyın.</p>
+        <h3 data-i18n="h.s3.title">Sağ Tık + Sürükle → Taşı</h3>
+        <p data-i18n="h.s3.desc">Pencereyi ekranda istediğiniz yere taşıyın.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">04</div>
       <div>
-        <h3>Sağ Tık (Bırak) → Menü</h3>
-        <p>Sürüklemeden sağ tıklayıp bırakın: Grow (+), Shrink (−) ve Close menüsü açılır.</p>
+        <h3 data-i18n="h.s4.title">Sağ Tık (Bırak) → Menü</h3>
+        <p data-i18n="h.s4.desc">Sürüklemeden sağ tıklayıp bırakın: Grow (+), Shrink (−) ve Close menüsü açılır.</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">05</div>
       <div>
-        <h3>Otomatik Boyut</h3>
-        <p>Menüden büyütüp küçültürken pencere oran korunarak eşit ölçeklenir.</p>
+        <h3 data-i18n="h.s5.title">Otomatik Boyut</h3>
+        <p data-i18n="h.s5.desc">Menüden büyütüp küçültürken pencere oran korunarak eşit ölçeklenir.</p>
       </div>
     </div>
   </div>
@@ -227,9 +236,9 @@ footer a:hover{text-decoration:underline}
 <!-- TECH -->
 <section id="tech">
 <div class="section-inner">
-  <div class="section-label">Teknoloji</div>
-  <h2 class="section-title">Hangi Teknolojiler?</h2>
-  <p class="section-desc">Sıfırdan, herhangi bir GUI framework'ü kullanmadan — sadece Windows API ve Python.</p>
+  <div class="section-label" data-i18n="t.label">Teknoloji</div>
+  <h2 class="section-title" data-i18n="t.title">Hangi Teknolojiler?</h2>
+  <p class="section-desc" data-i18n="t.desc">Sıfırdan, herhangi bir GUI framework'ü kullanmadan — sadece Windows API ve Python.</p>
 
   <div class="tech-grid">
     <div class="tech-pill"><span class="dot" style="background:#3776ab"></span>Python 3.14</div>
@@ -249,8 +258,8 @@ footer a:hover{text-decoration:underline}
 <section id="install" style="background:var(--surface)">
 <div class="section-inner" style="display:flex;justify-content:center">
   <div class="install-box" style="max-width:520px;width:100%">
-    <h3>İndir & Kur</h3>
-    <p>Tek dosya, bağımlılık yok. Python kurulu olmasına gerek yoktur.</p>
+    <h3 data-i18n="i.title">İndir & Kur</h3>
+    <p data-i18n="i.desc">Tek dosya, bağımlılık yok. Python kurulu olmasına gerek yoktur.</p>
     <a href="https://github.com/suphimen/ArrowKeys/releases/latest/download/ArrowKeys_Setup.exe" class="file" style="text-decoration:none">
       <svg viewBox="0 0 24 24"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3z"/><path d="M5 20h14v2H5z"/></svg>
       ArrowKeys_Setup.exe &nbsp;·&nbsp; 33 MB &nbsp;·&nbsp; Windows 10/11
@@ -261,8 +270,89 @@ footer a:hover{text-decoration:underline}
 
 <!-- FOOTER -->
 <footer>
-  <p>ArrowKeys &mdash; Made with Python + Win32 API by <a href="https://x.com/suphimen" target="_blank" rel="noopener">suphimen</a> &middot; MIT License</p>
+  <p data-i18n-html="footer.text">ArrowKeys &mdash; Made with Python + Win32 API by <a href="https://x.com/suphimen" target="_blank" rel="noopener">suphimen</a> &middot; MIT License</p>
 </footer>
+
+<script>
+const I18N = {
+  tr: {
+    "nav.features":"Özellikler","nav.howto":"Kullanım","nav.tech":"Teknoloji","nav.download":"İndir",
+    "hero.tagline":"Masaüstünde her zaman üstte duran, fareyle kontrol edilen sanal ok tuşu paneli.",
+    "hero.download":"İndir",
+    "f.label":"Özellikler","f.title":"Neden ArrowKeys?",
+    "f.desc":"Normal klavye tuşları yetersiz kaldığında, oyunlarda veya metin düzenleyicilerde tam kontrol sağlar.",
+    "f1.title":"Her Zaman Üstte","f1.desc":"Pencere asla arka plana düşmez. Çalışırken sürekli görünür kalır.",
+    "f2.title":"Odağı Çalmaz","f2.desc":"WS_EX_NOACTIVATE ile çalışır — yazdığınız belge, açtığınız oyun odak kaybetmez.",
+    "f3.title":"Sürükle & Boyutlandır","f3.desc":"Sağ tıkla sürükle → taşı. Sağ tık menüsünden Büyüt/Küçült ile ölçekle.",
+    "f4.title":"Tutarak Tekrarla","f4.desc":"Tuşa basılı tuttuğunuzda ok sinyali otomatik tekrarlanır — fiziksel tuş gibi çalışır.",
+    "f5.title":"Yuvarlak Köşeler","f5.desc":"WinAPI region ile sadece tuşlar görünür, çerçeve yok — sade ve temiz.",
+    "f6.title":"Yalnızca Tek Instance","f6.desc":"İkinci kez çalıştırmaya çalıştığınızda uyarı alırsınız — çift pencere açılmaz.",
+    "h.label":"Kullanım Kılavuzu","h.title":"Nasıl Çalışır?",
+    "h.s1.title":"Sol Tıkla → Tuş Bas","h.s1.desc":"Herhangi bir ok tuşuna sol tıklayın. Kırmızı renk yanar ve ok sinyali gönderilir.",
+    "h.s2.title":"Basılı Tut → Tekrarla","h.s2.desc":"Fareyi basılı tutmaya devam edin; 450ms sonra tuş otomatik tekrarlamaya başlar.",
+    "h.s3.title":"Sağ Tık + Sürükle → Taşı","h.s3.desc":"Pencereyi ekranda istediğiniz yere taşıyın.",
+    "h.s4.title":"Sağ Tık (Bırak) → Menü","h.s4.desc":"Sürüklemeden sağ tıklayıp bırakın: Grow (+), Shrink (−) ve Close menüsü açılır.",
+    "h.s5.title":"Otomatik Boyut","h.s5.desc":"Menüden büyütüp küçültürken pencere oran korunarak eşit ölçeklenir.",
+    "t.label":"Teknoloji","t.title":"Hangi Teknolojiler?",
+    "t.desc":"Sıfırdan, herhangi bir GUI framework'ü kullanmadan — sadece Windows API ve Python.",
+    "i.title":"İndir & Kur","i.desc":"Tek dosya, bağımlılık yok. Python kurulu olmasına gerek yoktur.",
+    "footer.text":"ArrowKeys &mdash; Made with Python + Win32 API by <a href=\"https://x.com/suphimen\" target=\"_blank\" rel=\"noopener\">suphimen</a> &middot; MIT License"
+  },
+  en: {
+    "nav.features":"Features","nav.howto":"How to Use","nav.tech":"Technology","nav.download":"Download",
+    "hero.tagline":"An always-on-top, mouse-controlled virtual arrow-key pad for your desktop.",
+    "hero.download":"Download",
+    "f.label":"Features","f.title":"Why ArrowKeys?",
+    "f.desc":"Full control when the physical keys aren't enough — in games, editors, or anywhere else.",
+    "f1.title":"Always on Top","f1.desc":"The window never falls behind — it stays visible while you work.",
+    "f2.title":"Never Steals Focus","f2.desc":"Built with WS_EX_NOACTIVATE — your document or game keeps focus the whole time.",
+    "f3.title":"Drag & Resize","f3.desc":"Right-click drag to move. Right-click menu to Grow/Shrink the pad.",
+    "f4.title":"Hold to Repeat","f4.desc":"Hold a key down and the arrow signal repeats automatically — just like a physical key.",
+    "f5.title":"Rounded Corners","f5.desc":"WinAPI region clipping — only the keys are visible, no frame at all.",
+    "f6.title":"Single Instance","f6.desc":"Launching a second copy shows a warning — no duplicate windows.",
+    "h.label":"User Guide","h.title":"How does it work?",
+    "h.s1.title":"Left-click → Press","h.s1.desc":"Left-click any arrow key. It glows red and the arrow signal is sent.",
+    "h.s2.title":"Hold → Repeat","h.s2.desc":"Keep the mouse held; after 450ms the key starts auto-repeating.",
+    "h.s3.title":"Right-drag → Move","h.s3.desc":"Drag the window to any position on screen.",
+    "h.s4.title":"Right-click (release) → Menu","h.s4.desc":"Right-click and release without dragging: Grow (+), Shrink (−) and Close.",
+    "h.s5.title":"Auto Scaling","h.s5.desc":"Grow/Shrink keep the aspect ratio and scale evenly around the center.",
+    "t.label":"Technology","t.title":"What powers it?",
+    "t.desc":"Built from scratch without any GUI framework — just the Windows API and Python.",
+    "i.title":"Download & Install","i.desc":"Single file, no dependencies. No Python installation required.",
+    "footer.text":"ArrowKeys &mdash; Made with Python + Win32 API by <a href=\"https://x.com/suphimen\" target=\"_blank\" rel=\"noopener\">suphimen</a> &middot; MIT License"
+  }
+};
+
+function detectLang(){
+  const saved = localStorage.getItem("lang");
+  if (saved) return saved;
+  const nav = (navigator.language || "en").toLowerCase();
+  return nav.startsWith("tr") ? "tr" : "en";
+}
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  localStorage.setItem("lang", lang);
+  const dict = I18N[lang];
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const k = el.getAttribute("data-i18n");
+    if (dict[k]) el.textContent = dict[k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    const k = el.getAttribute("data-i18n-html");
+    if (dict[k]) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+  btn.addEventListener("click", () => applyLang(btn.getAttribute("data-lang")));
+});
+
+applyLang(detectLang());
+</script>
 
 </body>
 </html>
